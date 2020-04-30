@@ -1,0 +1,44 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "existingVNETName": {
+              "defaultValue": "NZb_VN_Servers",
+              "type": "string",
+              "metadata": {
+                  "description": "Name of the VNET to add a subnet to"
+              }
+          },
+          "newPRODSubnetName": {
+              "defaultValue": "NZb_VS_MemberName",
+              "type": "string",
+              "metadata": {
+                  "description": "Production Name of the subnet to add, example NZb_VS_MemberName"
+          }
+          },
+                  "newSubnetPRODAddressPrefix": {
+              "type": "string",
+              "defaultValue": "172.16.21.0/24",
+              "metadata": {
+                  "description": "Production Address space of the subnet to add, CHECK the current subnets, this will be the next available"
+              }
+
+          }
+      },
+    "variables": {},
+    "resources": [
+        {
+      "apiVersion": "2018-04-01",
+        "type": "Microsoft.Network/virtualNetworks/subnets",
+        "name": "[concat(parameters('existingVNETName'), '/', parameters('newPRODSubnetName'))]",
+        "location": "NZb_RG_Servers",
+        "properties": {
+          "addressPrefix": "[parameters('newSubnetPRODAddressPrefix')]"
+        }
+            }
+            ]
+       
+            }
+
+
+  
